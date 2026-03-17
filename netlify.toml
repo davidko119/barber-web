@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  VITE_CONVEX_URL = "https://friendly-fennec-985.convex.cloud"
+  NODE_VERSION = "22"
