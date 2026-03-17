@@ -6,3 +6,13 @@ dist/
 .DS_Store
 Thumbs.db
 nul
+.agent/
+.agents/
+.claude/
+.factory/
+.kiro/
+.qoder/
+.trae/
+.windsurf/
+skills/
+skills-lock.json

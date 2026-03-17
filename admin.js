@@ -5,7 +5,7 @@
 import { ConvexClient } from "convex/browser";
 
 // ─── Konfigurácia ─────────────────────────────
-const ADMIN_PASSWORD = "DON2026";
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || "DON2026";
 const CONVEX_URL     = import.meta.env.VITE_CONVEX_URL;
 let api = null;
 

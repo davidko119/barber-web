@@ -4,4 +4,5 @@
 
 [build.environment]
   VITE_CONVEX_URL = "https://cautious-manatee-368.convex.cloud"
+  VITE_ADMIN_PASSWORD = "DON2026"
   NODE_VERSION = "22"
