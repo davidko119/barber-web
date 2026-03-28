@@ -101,34 +101,38 @@ const loaderInterval = setInterval(() => {
 
 document.body.style.overflow = 'hidden';
 
-// ─── Custom Cursor ─────────────────────────────
+// ─── Custom Cursor (only on non-touch devices) ──────────────────
 const cursor   = document.getElementById('cursor');
 const follower = document.getElementById('cursorFollower');
 
-let mouseX = 0, mouseY = 0;
-let followerX = 0, followerY = 0;
+const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
 
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  cursor.style.left = mouseX + 'px';
-  cursor.style.top  = mouseY + 'px';
-});
+if (hasFinePointer) {
+  let mouseX = 0, mouseY = 0;
+  let followerX = 0, followerY = 0;
 
-function animateFollower() {
-  followerX += (mouseX - followerX) * 0.1;
-  followerY += (mouseY - followerY) * 0.1;
-  follower.style.left = followerX + 'px';
-  follower.style.top  = followerY + 'px';
-  requestAnimationFrame(animateFollower);
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top  = mouseY + 'px';
+  });
+
+  function animateFollower() {
+    followerX += (mouseX - followerX) * 0.1;
+    followerY += (mouseY - followerY) * 0.1;
+    follower.style.left = followerX + 'px';
+    follower.style.top  = followerY + 'px';
+    requestAnimationFrame(animateFollower);
+  }
+  animateFollower();
+
+  const hoverEls = document.querySelectorAll('a, button, .service-card, .team-card, .strip-item');
+  hoverEls.forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
 }
-animateFollower();
-
-const hoverEls = document.querySelectorAll('a, button, .service-card, .team-card, .strip-item');
-hoverEls.forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-});
 
 // ─── Navigation ────────────────────────────────
 const nav       = document.getElementById('nav');

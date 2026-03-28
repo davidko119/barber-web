@@ -92,6 +92,13 @@ button { cursor: none; border: none; background: none; font: inherit; }
 body.cursor-hover .cursor { width: 14px; height: 14px; }
 body.cursor-hover .cursor-follower { width: 56px; height: 56px; border-color: var(--gold); }
 
+/* Hide custom cursor on touch / coarse-pointer devices */
+@media (pointer: coarse) {
+  .cursor,
+  .cursor-follower { display: none !important; }
+  body, button, a { cursor: auto; }
+}
+
 /* ============================================
    LOADER
    ============================================ */
