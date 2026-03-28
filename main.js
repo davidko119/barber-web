@@ -19,8 +19,60 @@ async function initConvex() {
   try {
     const mod = await import("./convex/_generated/api.js");
     api = mod.api;
-  } catch {
-    console.warn("Convex API modul nie je vygenerovaný. Spusti: npx convex dev");
+    
+    // Načítaj dynamický obsah a galériu
+    loadDynamicContent();
+    loadGallery();
+  } catch (err) {
+    console.warn("Convex API modul nie je k dispozícii alebo chyba:", err);
+  }
+}
+
+async function loadDynamicContent() {
+  if (!convex || !api) return;
+  try {
+    const content = await convex.query(api.site.getContent);
+    content.forEach(item => {
+      // Mapovanie kľúčov na ID v HTML
+      let elementId = item.key.replace(/_/g, '-');
+      if (item.key.endsWith('_img')) elementId += '-el';
+      
+      const el = document.getElementById(elementId);
+      if (el) {
+        if (el.tagName === 'IMG') {
+          el.src = item.value;
+        } else {
+          el.innerHTML = item.value;
+        }
+      }
+    });
+  } catch (err) {
+    console.error("Chyba pri načítaní obsahu:", err);
+  }
+}
+
+async function loadGallery() {
+  if (!convex || !api) return;
+  try {
+    const gallery = await convex.query(api.site.getGallery);
+    const track = document.getElementById('gallery-track');
+    if (!track) return;
+    
+    if (gallery.length === 0) {
+      track.innerHTML = '<p style="color:rgba(255,255,255,0.2); padding: 2rem;">Galéria sa pripravuje...</p>';
+      return;
+    }
+
+    track.innerHTML = gallery.map(item => `
+      <div class="gallery-photo reveal-up">
+        <img src="${item.url}" alt="Barber work" loading="lazy" />
+      </div>
+    `).join('');
+    
+    // Re-iniciácia animácií pre nové elementy
+    setTimeout(initAnimations, 100);
+  } catch (err) {
+    console.error("Chyba pri načítaní galérie:", err);
   }
 }
 

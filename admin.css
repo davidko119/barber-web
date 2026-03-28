@@ -528,3 +528,227 @@ input, select { font: inherit; }
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: var(--dark); }
 ::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); border-radius: 2px; }
+
+/* ─── Sidebar Additions ─────────────────────── */
+.sidebar-sep {
+  height: 1px;
+  background: rgba(255,255,255,0.05);
+  margin: 1rem 1.5rem;
+}
+
+/* ─── Page Editor ───────────────────────────── */
+.editor-view {
+  animation: fadeInAdmin 0.4s ease-out;
+}
+
+.editor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.editor-section {
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.editor-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.editor-field {
+  margin-bottom: 1.25rem;
+}
+
+.editor-field label {
+  display: block;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 0.5rem;
+}
+
+.editor-field input,
+.editor-field textarea {
+  width: 100%;
+  background: #0f0f0f;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  color: #fff;
+  padding: 0.75rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.editor-field input:focus,
+.editor-field textarea:focus {
+  outline: none;
+  border-color: #ff0000; /* Fixed red accent */
+}
+
+.editor-img-preview {
+  margin-top: 0.5rem;
+  height: 140px;
+  background: #000;
+  border-radius: 6px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.2);
+}
+
+.editor-img-preview.has-image {
+  font-size: 0;
+}
+
+.editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.save-btn {
+  background: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.save-btn:hover {
+  background: #cc0000;
+  transform: translateY(-2px);
+}
+
+.save-status {
+  font-size: 0.9rem;
+  color: #4cd137;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.save-status.show {
+  opacity: 1;
+}
+
+/* ─── Gallery ───────────────────────────────── */
+.gallery-view {
+  animation: fadeInAdmin 0.4s ease-out;
+}
+
+.gallery-add {
+  background: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.gallery-add-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.add-btn {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 0 2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 1;
+  background: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+.gallery-item-delete {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(255,0,0,0.8);
+  color: #fff;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 2;
+}
+
+.gallery-item-delete svg {
+  width: 16px;
+  height: 16px;
+}
+
+.gallery-item:hover .gallery-item-delete {
+  opacity: 1;
+}
+
+.gallery-item-delete:hover {
+  transform: scale(1.1);
+  background: #f00;
+}
+
+.gallery-loading {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: rgba(255,255,255,0.3);
+}
+
+@keyframes fadeInAdmin {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .editor-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -48,6 +48,15 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           Štatistiky
         </a>
+        <div class="sidebar-sep"></div>
+        <a href="#" class="sidebar-link" data-view="editor">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Editor Stránky
+        </a>
+        <a href="#" class="sidebar-link" data-view="gallery">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          Galéria
+        </a>
       </nav>
       <button class="sidebar-logout" id="logoutBtn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
@@ -133,6 +142,82 @@
         <div class="top-services">
           <h3>Najčastejšie služby</h3>
           <div id="servicesList"></div>
+        </div>
+      </div>
+
+      <!-- Page Editor View -->
+      <div class="editor-view hidden" id="editorView">
+        <div class="editor-grid">
+          <!-- Hero Section -->
+          <div class="editor-section">
+            <h3 class="editor-section-title">Úvod (Hero)</h3>
+            <div class="editor-field">
+              <label>Hlavný nadpis</label>
+              <textarea data-key="hero_title" rows="2"></textarea>
+            </div>
+            <div class="editor-field">
+              <label>Podnadpis</label>
+              <textarea data-key="hero_sub" rows="3"></textarea>
+            </div>
+            <div class="editor-field">
+              <label>URL Obrázka (Pozadie)</label>
+              <input type="text" data-key="hero_img" />
+              <div class="editor-img-preview" id="preview-hero_img"></div>
+            </div>
+          </div>
+
+          <!-- About Section -->
+          <div class="editor-section">
+            <h3 class="editor-section-title">O nás</h3>
+            <div class="editor-field">
+              <label>Hlavný text (Body 1)</label>
+              <textarea data-key="about_body_1" rows="4"></textarea>
+            </div>
+            <div class="editor-field">
+              <label>Sekundárny text (Body 2)</label>
+              <textarea data-key="about_body_2" rows="4"></textarea>
+            </div>
+            <div class="editor-field">
+              <label>URL Obrázka</label>
+              <input type="text" data-key="about_img" />
+              <div class="editor-img-preview" id="preview-about_img"></div>
+            </div>
+          </div>
+
+          <!-- Space Section -->
+          <div class="editor-section">
+            <h3 class="editor-section-title">Priestor</h3>
+            <div class="editor-field">
+              <label>Text o priestore</label>
+              <textarea data-key="space_body" rows="4"></textarea>
+            </div>
+            <div class="editor-field">
+              <label>URL Obrázka (Lebo priestor)</label>
+              <input type="text" data-key="space_img" />
+              <div class="editor-img-preview" id="preview-space_img"></div>
+            </div>
+          </div>
+        </div>
+        <div class="editor-actions">
+          <button class="save-btn" id="saveContentBtn">Uložiť zmeny</button>
+          <span class="save-status" id="saveStatus"></span>
+        </div>
+      </div>
+
+      <!-- Gallery View -->
+      <div class="gallery-view hidden" id="galleryView">
+        <div class="gallery-add">
+          <div class="editor-field">
+            <label>Pridať novú fotku (URL)</label>
+            <div class="gallery-add-row">
+              <input type="text" id="newGalleryUrl" placeholder="https://..." />
+              <button class="add-btn" id="addGalleryBtn">Pridať</button>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-grid" id="galleryGrid">
+          <!-- Dynamicky načítané fotky -->
+          <div class="gallery-loading">Načítavam galériu...</div>
         </div>
       </div>
 

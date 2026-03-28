@@ -25,19 +25,34 @@ const deleteModal    = document.getElementById('deleteModal');
 const modalCancel    = document.getElementById('modalCancel');
 const modalConfirm   = document.getElementById('modalConfirm');
 const sidebarLinks   = document.querySelectorAll('.sidebar-link');
+const editorView     = document.getElementById('editorView');
+const galleryView    = document.getElementById('galleryView');
+const galleryGrid    = document.getElementById('galleryGrid');
+const saveContentBtn = document.getElementById('saveContentBtn');
+const saveStatus     = document.getElementById('saveStatus');
+const addGalleryBtn  = document.getElementById('addGalleryBtn');
+const newGalleryUrl  = document.getElementById('newGalleryUrl');
+const tableWrap    = document.querySelector('.table-wrap');
+const statsView    = document.getElementById('statsView');
+const adminFilters = document.querySelector('.admin-filters');
+const adminTitle   = document.querySelector('.admin-title');
 
 let convex = null;
 let allBookings   = [];
 let activeFilter  = 'all';
 let pendingDelete = null;
 let unsubscribe   = null;
+let unsubContent  = null;
+let unsubGallery  = null;
+let allContent    = [];
+let allGallery    = [];
 
 // Názvy služieb
 const SERVICE_LABELS = {
-  haircut:  'Haircut & Beard',
-  skincare: 'Skincare & Oils',
-  body:     'Body Treatment',
-  shampoo:  'Shampoo & Styling',
+  haircut:  'Strih & Brada',
+  skincare: 'Pleť & Oleje',
+  body:     'Starostlivosť o telo',
+  shampoo:  'Šampón & Styling',
 };
 
 // ─── Autentifikácia ────────────────────────────
@@ -55,6 +70,8 @@ function showLogin() {
   adminLogin.classList.remove('hidden');
   adminDashboard.classList.add('hidden');
   if (unsubscribe) { unsubscribe(); unsubscribe = null; }
+  if (unsubContent) { unsubContent(); unsubContent = null; }
+  if (unsubGallery) { unsubGallery(); unsubGallery = null; }
 }
 
 // Kontrola session pri načítaní
@@ -115,12 +132,35 @@ function initConvex() {
         setStatus('error');
       }
     );
-  }).catch(() => {
-    console.warn("Convex _generated/api.js nie je k dispozícii. Spusti: npx convex dev");
+
+    // Site Content Subscription
+    unsubContent = convex.onUpdate(
+      api.site.getContent,
+      {},
+      (content) => {
+        allContent = content || [];
+        if (activeView === 'editor') renderEditor();
+      }
+    );
+
+    // Gallery Subscription
+    unsubGallery = convex.onUpdate(
+      api.site.getGallery,
+      {},
+      (gallery) => {
+        allGallery = gallery || [];
+        if (activeView === 'gallery') renderGallery();
+      }
+    );
+
+  }).catch((err) => {
+    console.error("Chyba pri načítaní Convex API:", err);
     setStatus('error');
     loadFallbackData();
   });
 }
+
+let activeView = 'bookings';
 
 // Fallback — localStorage (keď Convex nie je nakonfigurovaný)
 function loadFallbackData() {
@@ -337,23 +377,133 @@ sidebarLinks.forEach(link => {
     link.classList.add('active');
 
     const view = link.dataset.view;
-    const tableWrap  = document.querySelector('.table-wrap');
-    const statsView  = document.getElementById('statsView');
-    const adminTitle = document.querySelector('.admin-title');
-    const adminFilters = document.querySelector('.admin-filters');
+    activeView = view;
+    
+    // Resetuj všetky pohľady
+    [tableWrap, statsView, editorView, galleryView, adminFilters].forEach(el => el.classList.add('hidden'));
 
     if (view === 'bookings') {
       tableWrap.classList.remove('hidden');
       adminFilters.classList.remove('hidden');
-      statsView.classList.add('hidden');
       adminTitle.textContent = 'Rezervácie';
-    } else {
-      tableWrap.classList.add('hidden');
-      adminFilters.classList.add('hidden');
+      renderTable();
+    } else if (view === 'stats') {
       statsView.classList.remove('hidden');
       adminTitle.textContent = 'Štatistiky';
+      renderStats();
+    } else if (view === 'editor') {
+      editorView.classList.remove('hidden');
+      adminTitle.textContent = 'Editor Stránky';
+      renderEditor();
+    } else if (view === 'gallery') {
+      galleryView.classList.remove('hidden');
+      adminTitle.textContent = 'Galéria';
+      renderGallery();
     }
   });
+});
+
+// ─── Editor Funkcie ───────────────────────────
+function renderEditor() {
+  const inputs = editorView.querySelectorAll('textarea[data-key], input[data-key]');
+  inputs.forEach(input => {
+    const key = input.dataset.key;
+    const item = allContent.find(c => c.key === key);
+    input.value = item ? item.value : '';
+    updateImagePreview(key, input.value);
+  });
+}
+
+editorView.addEventListener('input', (e) => {
+  if (e.target.dataset.key) {
+    updateImagePreview(e.target.dataset.key, e.target.value);
+  }
+});
+
+function updateImagePreview(key, value) {
+  const preview = document.getElementById(`preview-${key}`);
+  if (preview) {
+    if (value && (value.startsWith('http') || value.startsWith('assets/'))) {
+      preview.style.backgroundImage = `url(${value})`;
+      preview.classList.add('has-image');
+    } else {
+      preview.style.backgroundImage = '';
+      preview.classList.remove('has-image');
+    }
+  }
+}
+
+saveContentBtn.addEventListener('click', async () => {
+  const inputs = editorView.querySelectorAll('textarea[data-key], input[data-key]');
+  saveContentBtn.disabled = true;
+  saveContentBtn.textContent = 'Ukladám...';
+
+  try {
+    for (const input of inputs) {
+      const key = input.dataset.key;
+      const value = input.value.trim();
+      await convex.mutation(api.site.updateContent, { key, value });
+    }
+    saveStatus.textContent = 'Zmeny uložené!';
+    saveStatus.classList.add('show');
+    setTimeout(() => saveStatus.classList.remove('show'), 3000);
+  } catch (err) {
+    console.error('Chyba pri ukladaní obsahu:', err);
+    alert('Chyba pri ukladaní: ' + err.message);
+  } finally {
+    saveContentBtn.disabled = false;
+    saveContentBtn.textContent = 'Uložiť zmeny';
+  }
+});
+
+// ─── Gallery Funkcie ──────────────────────────
+function renderGallery() {
+  galleryGrid.innerHTML = '';
+  
+  if (allGallery.length === 0) {
+    galleryGrid.innerHTML = '<div class="gallery-loading">Galéria je prázdna. Pridajte prvú fotku vyššie.</div>';
+    return;
+  }
+
+  allGallery.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'gallery-item';
+    div.innerHTML = `
+      <img src="${esc(item.url)}" alt="Gallery image" loading="lazy" />
+      <button class="gallery-item-delete" data-id="${item._id}" title="Vymazať">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    `;
+    galleryGrid.appendChild(div);
+  });
+
+  galleryGrid.querySelectorAll('.gallery-item-delete').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.id;
+      if (confirm('Naozaj chcete vymazať túto fotku?')) {
+        try {
+          await convex.mutation(api.site.removeGalleryImage, { id });
+        } catch (err) {
+          console.error('Chyba pri mazaní fotky:', err);
+        }
+      }
+    });
+  });
+}
+
+addGalleryBtn.addEventListener('click', async () => {
+  const url = newGalleryUrl.value.trim();
+  if (!url) return;
+
+  addGalleryBtn.disabled = true;
+  try {
+    await convex.mutation(api.site.addGalleryImage, { url });
+    newGalleryUrl.value = '';
+  } catch (err) {
+    alert('Chyba: ' + err.message);
+  } finally {
+    addGalleryBtn.disabled = false;
+  }
 });
 
 // ─── Pomocné funkcie ───────────────────────────

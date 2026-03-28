@@ -19,4 +19,14 @@ export default defineSchema({
   })
     .index("by_date",   ["date"])
     .index("by_status", ["status"]),
+
+  site_content: defineTable({
+    key:   v.string(),
+    value: v.string(),
+  }).index("by_key", ["key"]),
+
+  gallery: defineTable({
+    url:   v.string(),
+    order: v.number(),
+  }).index("by_order", ["order"]),
 });

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DON — Humanhood</title>
+  <title>DON — Humanhood | Barber</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,7 +19,7 @@
   <div class="loader" id="loader">
     <div class="loader-inner">
       <div class="loader-logo">
-        <span class="loader-d">D</span><span class="loader-o">O</span><span class="loader-n">N</span>
+        <img src="assets/images/logo_barber.svg" alt="DON" style="height: 120px; width: auto; opacity: 0; transform: translateY(20px); animation: loaderLetterIn 1s var(--ease-out) forwards;" />
       </div>
       <div class="loader-bar"><div class="loader-progress" id="loaderProgress"></div></div>
     </div>
@@ -28,48 +28,56 @@
   <!-- Navigation -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">
-        <span class="logo-text">D<span class="logo-o">O</span>N</span>
-        <span class="logo-sub">HUMANHOOD</span>
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about" class="nav-link" data-text="About">About</a></li>
-        <li><a href="#services" class="nav-link" data-text="Services">Services</a></li>
-        <li><a href="#space" class="nav-link" data-text="The Space">The Space</a></li>
-        <li><a href="#team" class="nav-link" data-text="Team">Team</a></li>
-        <li><a href="#shop" class="nav-link" data-text="Shop">Shop</a></li>
-        <li><a href="#contact" class="nav-link" data-text="Contact">Contact</a></li>
-      </ul>
-      <a href="#booking" class="nav-book">Book Now</a>
+      <div class="nav-left">
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-desktop-only">
+          <a href="#services" class="nav-link">Služby</a>
+          <a href="#about" class="nav-link">O nás</a>
+        </div>
+      </div>
+      
+      <div class="nav-center">
+        <a href="#" class="nav-logo">
+          <img src="assets/images/logo_barber.svg" alt="DON" style="height: 50px; width: auto;" />
+        </a>
+      </div>
+
+      <div class="nav-right">
+        <a href="#booking" class="nav-pill">Prihlásiť sa</a>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="nav-links" id="navLinks">
+      <a href="#services" class="nav-link">Služby</a>
+      <a href="#about" class="nav-link">O nás</a>
+      <a href="#team" class="nav-link">Tím</a>
+      <a href="#shop" class="nav-link">Obchod</a>
+      <a href="#contact" class="nav-link">Kontakt</a>
+      <div style="margin-top: 2rem;">
+        <a href="#booking" class="nav-pill">Prihlásiť sa</a>
+      </div>
     </div>
   </nav>
 
   <!-- Hero -->
   <section class="hero" id="hero">
     <div class="hero-bg" id="heroBg">
-      <img src="assets/images/ob2.png" alt="DON Humanhood" class="hero-img" />
-      <div class="hero-overlay"></div>
+      <img src="assets/images/barber_photo_hero.png" alt="DON Humanhood" class="hero-img" id="hero-img-el" />
+      <div class="hero-overlay" style="background: rgba(0,0,0,0.35);"></div>
     </div>
     <div class="hero-content">
-      <div class="hero-tag reveal-up">BEING</div>
-      <h1 class="hero-title reveal-up">
-        <span class="hero-title-line">HEAD-TO-TOE</span>
-        <span class="hero-title-line hero-title-italic">HUMAN</span>
+      <h1 class="hero-title reveal-up" id="hero-title">
+        Dnešok môže byť zmenou, ktorú hľadáte
       </h1>
-      <p class="hero-sub reveal-up">DON &nbsp;·&nbsp; HUMANHOOD</p>
-      <a href="#booking" class="hero-btn reveal-up">
-        <span>Reserve Your Time</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-
-    <!-- Hero photo reveal — pod textom -->
-    <div class="hero-photo-reveal">
-      <div class="hero-photo-inner">
-        <img src="assets/images/hero-photo.jpg" alt="DON Humanhood atmosphere" />
+      <p class="hero-sub reveal-up" id="hero-sub">
+        Nech už je vaša predstava o dokonalosti akákoľvek, my ju zrealizujeme.
+      </p>
+      <div class="hero-btns reveal-up">
+        <a href="#booking" class="btn-pill">Dámske služby</a>
+        <a href="#booking" class="btn-pill">Pánske služby</a>
       </div>
     </div>
 
@@ -82,17 +90,17 @@
   <!-- Marquee -->
   <div class="marquee-wrap">
     <div class="marquee-track">
-      <span>HAIRCUT</span><span class="marquee-dot">·</span>
-      <span>BEARD</span><span class="marquee-dot">·</span>
-      <span>SHAVING</span><span class="marquee-dot">·</span>
+      <span>STRIH</span><span class="marquee-dot">·</span>
+      <span>BRADA</span><span class="marquee-dot">·</span>
+      <span>HOLENIE</span><span class="marquee-dot">·</span>
       <span>STYLING</span><span class="marquee-dot">·</span>
-      <span>SKINCARE</span><span class="marquee-dot">·</span>
+      <span>STAROSTLIVOSŤ O PLEŤ</span><span class="marquee-dot">·</span>
       <span>WELLNESS</span><span class="marquee-dot">·</span>
-      <span>HAIRCUT</span><span class="marquee-dot">·</span>
-      <span>BEARD</span><span class="marquee-dot">·</span>
-      <span>SHAVING</span><span class="marquee-dot">·</span>
+      <span>STRIH</span><span class="marquee-dot">·</span>
+      <span>BRADA</span><span class="marquee-dot">·</span>
+      <span>HOLENIE</span><span class="marquee-dot">·</span>
       <span>STYLING</span><span class="marquee-dot">·</span>
-      <span>SKINCARE</span><span class="marquee-dot">·</span>
+      <span>STAROSTLIVOSŤ O PLEŤ</span><span class="marquee-dot">·</span>
       <span>WELLNESS</span><span class="marquee-dot">·</span>
     </div>
   </div>
@@ -101,20 +109,20 @@
   <section class="about" id="about">
     <div class="about-inner">
       <div class="about-text">
-        <div class="section-label reveal-up">About Us</div>
+        <div class="section-label reveal-up">O NÁS</div>
         <h2 class="section-title reveal-up">
-          More Than<br /><em>a Barbershop</em>
+          Viac než len<br /><em>holičstvo</em>
         </h2>
-        <p class="about-body reveal-up">
-          DON is a place where tradition meets modern grooming culture. We believe that taking care of yourself is not vanity — it is a form of self-respect. Every visit is a ritual. Every detail matters.
+        <p class="about-body reveal-up" id="about-body-1">
+          DON je miesto, kde sa tradícia stretáva s modernou kultúrou groomingu. Veríme, že starostlivosť o seba nie je márnivosť — je to forma sebaúcty. Každá návšteva u nás je rituálom. Každý detail zaváži.
         </p>
-        <p class="about-body reveal-up">
-          Founded on the philosophy of <strong>Humanhood</strong>, we offer premium services crafted for those who value quality, atmosphere and time well spent.
+        <p class="about-body reveal-up" id="about-body-2">
+          Založení na filozofii <strong>Humanhood</strong>, ponúkame prémiové služby vytvorené pre tých, ktorí oceňujú kvalitu, atmosféru a dobre strávený čas.
         </p>
-        <a href="#services" class="btn-outline reveal-up">Discover Services</a>
+        <a href="#services" class="btn-outline reveal-up">Objaviť služby</a>
       </div>
       <div class="about-image reveal-right">
-        <img src="assets/images/ob5.jpg" alt="Barber at work" />
+        <img src="assets/images/ob5.jpg" alt="Barber pri práci" id="about-img-el" />
         <div class="about-image-tag">EST. 2018</div>
       </div>
     </div>
@@ -123,60 +131,60 @@
   <!-- Services -->
   <section class="services" id="services">
     <div class="services-header">
-      <div class="section-label reveal-up">What We Offer</div>
-      <h2 class="section-title reveal-up">Our Services</h2>
+      <div class="section-label reveal-up">ČO PONÚKAME</div>
+      <h2 class="section-title reveal-up">Naše služby</h2>
     </div>
     <div class="services-grid">
 
       <div class="service-card reveal-up" data-index="1">
         <div class="service-card-img">
-          <img src="assets/images/ob5.jpg" alt="Haircut & Beard" />
+          <img src="assets/images/ob5.jpg" alt="Strih a brada" />
         </div>
         <div class="service-card-body">
           <span class="service-num">01</span>
-          <h3>Haircut &amp; Beard</h3>
-          <p>Classic and modern cuts, sculpted beards, hot towel shave. The full barber experience.</p>
-          <div class="service-price">from €35</div>
-          <a href="#booking" class="service-link">Book <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <h3>Strih &amp; Brada</h3>
+          <p>Klasické aj moderné strihy, úprava brady, holenie horúcim uterákom. Kompletný barber zážitok.</p>
+          <div class="service-price">od €35</div>
+          <a href="#booking" class="service-link">Rezervovať <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
 
       <div class="service-card reveal-up" data-index="2">
         <div class="service-card-img">
-          <img src="assets/images/ob8.jpg" alt="Skincare & Oils" />
+          <img src="assets/images/ob8.jpg" alt="Starostlivosť o pleť" />
         </div>
         <div class="service-card-body">
           <span class="service-num">02</span>
-          <h3>Skincare &amp; Oils</h3>
-          <p>Nourishing face treatments, essential oils and premium grooming rituals for your skin.</p>
-          <div class="service-price">from €45</div>
-          <a href="#booking" class="service-link">Book <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <h3>Pleť &amp; Oleje</h3>
+          <p>Vyživujúce pleťové ošetrenia, esenciálne oleje a prémiové rituály pre vašu pokožku.</p>
+          <div class="service-price">od €45</div>
+          <a href="#booking" class="service-link">Rezervovať <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
 
       <div class="service-card reveal-up" data-index="3">
         <div class="service-card-img">
-          <img src="assets/images/ob6.jpg" alt="Body Treatment" />
+          <img src="assets/images/ob6.jpg" alt="Telesné ošetrenie" />
         </div>
         <div class="service-card-body">
           <span class="service-num">03</span>
           <h3>Body Treatment</h3>
-          <p>Full body relaxation on our signature treatment table. Massage, oils, deep recovery.</p>
-          <div class="service-price">from €80</div>
-          <a href="#booking" class="service-link">Book <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <p>Úplný relax na našom špeciálnom lehátku. Masáže, oleje, hĺbková regenerácia.</p>
+          <div class="service-price">od €80</div>
+          <a href="#booking" class="service-link">Rezervovať <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
 
       <div class="service-card reveal-up" data-index="4">
         <div class="service-card-img">
-          <img src="assets/images/ob7.jpg" alt="Shampoo Station" />
+          <img src="assets/images/ob7.jpg" alt="Umývanie a styling" />
         </div>
         <div class="service-card-body">
           <span class="service-num">04</span>
-          <h3>Shampoo &amp; Styling</h3>
-          <p>Luxury wash experience in our dedicated shampoo stations, finished with expert styling.</p>
-          <div class="service-price">from €25</div>
-          <a href="#booking" class="service-link">Book <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <h3>Umývanie &amp; Styling</h3>
+          <p>Luxusný zážitok v našich umývacích staniciach, zakončený profesionálnym stylingom.</p>
+          <div class="service-price">od €25</div>
+          <a href="#booking" class="service-link">Rezervovať <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
       </div>
 
@@ -186,16 +194,16 @@
   <!-- Full-width split image strip -->
   <div class="strip">
     <div class="strip-item parallax-img" data-speed="0.15">
-      <img src="assets/images/ob4.jpg" alt="Interior" />
-      <div class="strip-label">The Chair</div>
+      <img src="assets/images/ob4.jpg" alt="Interiér" />
+      <div class="strip-label">Kreslo</div>
     </div>
     <div class="strip-item parallax-img" data-speed="0.08">
-      <img src="assets/images/ob1.jpg" alt="Bar interior" />
-      <div class="strip-label">The Bar</div>
+      <img src="assets/images/ob1.jpg" alt="Interiér baru" />
+      <div class="strip-label">Bar</div>
     </div>
     <div class="strip-item parallax-img" data-speed="0.12">
-      <img src="assets/images/ob10.jpg" alt="Products" />
-      <div class="strip-label">Products</div>
+      <img src="assets/images/ob10.jpg" alt="Produkty" />
+      <div class="strip-label">Produkty</div>
     </div>
   </div>
 
@@ -203,26 +211,26 @@
   <section class="space" id="space">
     <div class="space-inner">
       <div class="space-image-left reveal-left">
-        <img src="assets/images/ob3.jpg" alt="Master Barber" />
+        <img src="assets/images/ob3.jpg" alt="Master Barber" id="space-img-el" />
       </div>
       <div class="space-content">
-        <div class="section-label reveal-up">The Experience</div>
-        <h2 class="section-title reveal-up">A Space Built<br /><em>for Men</em></h2>
-        <p class="space-body reveal-up">
-          Dark wood, brass lamps, teal velvet chairs — every element of DON has been curated to create a space that feels like a private club. You come for a haircut. You stay for the feeling.
+        <div class="section-label reveal-up">ZÁŽITOK</div>
+        <h2 class="section-title reveal-up">Priestor vytvorený<br /><em>pre mužov</em></h2>
+        <p class="space-body reveal-up" id="space-body-el">
+          Tmavé drevo, mosadzné lampy, zamatové kreslá — každý prvok DON bol navrhnutý tak, aby vytvoril pocit súkromného klubu. Prichádzate pre strih. Zostávate pre ten pocit.
         </p>
         <div class="space-stats reveal-up">
           <div class="stat">
             <span class="stat-num" data-count="6">0</span>
-            <span class="stat-label">Barber Chairs</span>
+            <span class="stat-label">Barberských kresiel</span>
           </div>
           <div class="stat">
             <span class="stat-num" data-count="12">0</span>
-            <span class="stat-label">Expert Barbers</span>
+            <span class="stat-label">Expertov</span>
           </div>
           <div class="stat">
             <span class="stat-num" data-count="8">0</span>
-            <span class="stat-label">Years of Craft</span>
+            <span class="stat-label">Rokov remesla</span>
           </div>
         </div>
       </div>
@@ -232,19 +240,19 @@
   <!-- Full bleed image -->
   <div class="full-bleed parallax-section" id="fullBleed">
     <div class="full-bleed-bg" id="fullBleedBg">
-      <img src="assets/images/ob1.jpg" alt="Interior" />
+      <img src="assets/images/ob1.jpg" alt="Interiér" />
     </div>
     <div class="full-bleed-content">
-      <h2 class="full-bleed-title reveal-up">Keep It<br /><em>Handsome</em></h2>
-      <a href="#booking" class="btn-white reveal-up">Book Appointment</a>
+      <h2 class="full-bleed-title reveal-up">Buďte<br /><em>štýlový</em></h2>
+      <a href="#booking" class="btn-white reveal-up">Rezervovať termín</a>
     </div>
   </div>
 
   <!-- Team -->
   <section class="team" id="team">
     <div class="team-header">
-      <div class="section-label reveal-up">The People</div>
-      <h2 class="section-title reveal-up">Meet the Team</h2>
+      <div class="section-label reveal-up">ĽUDIA</div>
+      <h2 class="section-title reveal-up">Spoznajte náš tím</h2>
     </div>
     <div class="team-grid">
       <div class="team-card reveal-up">
@@ -252,7 +260,7 @@
           <img src="assets/images/ob3.jpg" alt="Marco — Master Barber" />
           <div class="team-hover">
             <span>Master Barber</span>
-            <p>15 years of craft. Specialist in classic cuts and hot towel shave.</p>
+            <p>15 rokov remesla. Špecialista na klasické strihy a holenie horúcim uterákom.</p>
           </div>
         </div>
         <div class="team-info">
@@ -262,28 +270,28 @@
       </div>
       <div class="team-card reveal-up" style="--delay:0.15s">
         <div class="team-img">
-          <img src="assets/images/ob5.jpg" alt="Barber at work" />
+          <img src="assets/images/ob5.jpg" alt="Barber pri práci" />
           <div class="team-hover">
-            <span>Beard Specialist</span>
-            <p>Precision beard sculpting and traditional shaving rituals.</p>
+            <span>Špecialista na bradu</span>
+            <p>Precízne tvarovanie brady a tradičné rituály holenia.</p>
           </div>
         </div>
         <div class="team-info">
           <h3>Andrei</h3>
-          <span>Beard Specialist</span>
+          <span>Špecialista na bradu</span>
         </div>
       </div>
       <div class="team-card reveal-up" style="--delay:0.3s">
         <div class="team-img">
-          <img src="assets/images/ob8.jpg" alt="Skincare Expert" />
+          <img src="assets/images/ob8.jpg" alt="Expert na pleť" />
           <div class="team-hover">
-            <span>Skincare &amp; Wellness</span>
-            <p>Expert in facial treatments, oils and holistic grooming rituals.</p>
+            <span>Pleť & Wellness</span>
+            <p>Expert na pleťové ošetrenia, oleje a holistické rituály starostlivosti.</p>
           </div>
         </div>
         <div class="team-info">
           <h3>Sofia</h3>
-          <span>Skincare Expert</span>
+          <span>Expertka na pleť</span>
         </div>
       </div>
     </div>
@@ -293,20 +301,33 @@
   <section class="shop" id="shop">
     <div class="shop-inner">
       <div class="shop-content">
-        <div class="section-label reveal-up">DON Shop</div>
-        <h2 class="section-title reveal-up">Take the Ritual<br /><em>Home</em></h2>
+        <div class="section-label reveal-up">DON OBCHOD</div>
+        <h2 class="section-title reveal-up">Vezmite si rituál<br /><em>domov</em></h2>
         <p class="shop-body reveal-up">
-          Curated grooming products — from premium shampoos and styling waxes to skincare essentials and Acqua di Parma fragrances. Everything your routine deserves.
+          Vybrané grooming produkty — od prémiových šampónov a stylingových voskov až po pleťovú kozmetiku a vône Acqua di Parma. Všetko, čo si vaša rutina zaslúži.
         </p>
-        <a href="#" class="btn-outline reveal-up">Browse Products</a>
+        <a href="#" class="btn-outline reveal-up">Prehliadať produkty</a>
       </div>
       <div class="shop-images">
         <div class="shop-img-main reveal-right">
           <img src="assets/images/ob10.jpg" alt="DON Shop" />
         </div>
         <div class="shop-img-accent reveal-right" style="--delay:0.2s">
-          <img src="assets/images/ob9.jpg" alt="Clothing" />
+          <img src="assets/images/ob9.jpg" alt="Oblečenie" />
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery-section" id="gallery">
+    <div class="gallery-header">
+      <div class="section-label reveal-up">GALÉRIA</div>
+      <h2 class="section-title reveal-up">Naša práca &amp; <em>atmosféra</em></h2>
+    </div>
+    <div class="gallery-container">
+      <div class="gallery-track" id="gallery-track">
+        <!-- Dynamicky načítané fotky z Convex -->
       </div>
     </div>
   </section>
@@ -314,62 +335,62 @@
   <!-- Booking -->
   <section class="booking" id="booking">
     <div class="booking-bg">
-      <img src="assets/images/ob4.jpg" alt="Booking" />
+      <img src="assets/images/ob4.jpg" alt="Rezervácia" />
       <div class="booking-overlay"></div>
     </div>
     <div class="booking-inner">
-      <div class="section-label reveal-up">Reserve</div>
-      <h2 class="booking-title reveal-up">Book Your<br /><em>Appointment</em></h2>
+      <div class="section-label reveal-up">REZERVOVAŤ</div>
+      <h2 class="booking-title reveal-up">Rezervujte si<br /><em>svoj termín</em></h2>
       <form class="booking-form reveal-up" id="bookingForm">
         <div class="form-row">
           <div class="form-group">
             <input type="text" id="fname" placeholder=" " required />
-            <label for="fname">First Name</label>
+            <label for="fname">Meno</label>
           </div>
           <div class="form-group">
             <input type="text" id="lname" placeholder=" " required />
-            <label for="lname">Last Name</label>
+            <label for="lname">Priezvisko</label>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <input type="email" id="email" placeholder=" " required />
-            <label for="email">Email Address</label>
+            <label for="email">E-mailová adresa</label>
           </div>
           <div class="form-group">
             <input type="tel" id="phone" placeholder=" " />
-            <label for="phone">Phone Number</label>
+            <label for="phone">Telefónne číslo</label>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <select id="service" required>
               <option value="" disabled selected></option>
-              <option value="haircut">Haircut &amp; Beard — from €35</option>
-              <option value="skincare">Skincare &amp; Oils — from €45</option>
-              <option value="body">Body Treatment — from €80</option>
-              <option value="shampoo">Shampoo &amp; Styling — from €25</option>
+              <option value="haircut">Strih & Brada — od €35</option>
+              <option value="skincare">Pleť & Oleje — od €45</option>
+              <option value="body">Starostlivosť o telo — od €80</option>
+              <option value="shampoo">Šampón & Styling — od €25</option>
             </select>
-            <label for="service">Select Service</label>
+            <label for="service">Vyberte službu</label>
           </div>
           <div class="form-group">
             <input type="date" id="date" required />
-            <label for="date">Preferred Date</label>
+            <label for="date">Preferovaný dátum</label>
           </div>
         </div>
         <div class="form-group form-group--full">
           <textarea id="notes" placeholder=" " rows="3"></textarea>
-          <label for="notes">Additional Notes</label>
+          <label for="notes">Poznámka</label>
         </div>
         <button type="submit" class="form-submit">
-          <span>Confirm Booking</span>
+          <span>Potvrdiť rezerváciu</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
       </form>
       <div class="booking-success" id="bookingSuccess">
         <div class="success-icon">✓</div>
-        <h3>Booking Confirmed</h3>
-        <p>We'll be in touch shortly to confirm your appointment.</p>
+        <h3>Rezervácia úspešná</h3>
+        <p>Budeme vás čoskoro kontaktovať pre potvrdenie termínu.</p>
       </div>
     </div>
   </section>
@@ -379,35 +400,34 @@
     <div class="footer-top">
       <div class="footer-brand">
         <a href="#" class="footer-logo">
-          D<span class="logo-o">O</span>N
-          <span class="footer-logo-sub">HUMANHOOD</span>
+          <img src="assets/images/logo_barber.svg" alt="DON" style="height: 70px; width: auto;" />
         </a>
-        <p class="footer-tagline">Being Head-to-Toe Human</p>
+        <p class="footer-tagline">Byť človekom od hlavy po päty</p>
       </div>
       <div class="footer-nav">
-        <h4>Navigate</h4>
+        <h4>Navigácia</h4>
         <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#space">The Space</a></li>
-          <li><a href="#team">Team</a></li>
-          <li><a href="#shop">Shop</a></li>
-          <li><a href="#booking">Book Now</a></li>
+          <li><a href="#about">O nás</a></li>
+          <li><a href="#services">Služby</a></li>
+          <li><a href="#space">Priestor</a></li>
+          <li><a href="#team">Tím</a></li>
+          <li><a href="#shop">Obchod</a></li>
+          <li><a href="#booking">Rezervovať teraz</a></li>
         </ul>
       </div>
       <div class="footer-contact">
-        <h4>Visit Us</h4>
-        <p>Václavské náměstí 1<br />Prague, 110 00</p>
+        <h4>Navštívte nás</h4>
+        <p>Václavské náměstí 1<br />Praha, 110 00</p>
         <a href="tel:+420123456789">+420 123 456 789</a>
         <a href="mailto:hello@don-humanhood.com">hello@don-humanhood.com</a>
         <div class="footer-hours">
-          <span>Mon–Fri: 9:00–20:00</span>
-          <span>Sat: 9:00–18:00</span>
-          <span>Sun: Closed</span>
+          <span>Pon–Pia: 9:00–20:00</span>
+          <span>Sob: 9:00–18:00</span>
+          <span>Ned: Zatvorené</span>
         </div>
       </div>
       <div class="footer-social">
-        <h4>Follow</h4>
+        <h4>Sledujte nás</h4>
         <div class="social-links">
           <a href="#" class="social-link" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
@@ -421,8 +441,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 DON Humanhood. All rights reserved.</span>
-      <span>Crafted with precision</span>
+      <span>© 2026 DON Humanhood. Všetky práva vyhradené.</span>
+      <span>Vytvorené s precíznosťou</span>
     </div>
   </footer>
 
