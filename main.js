@@ -149,12 +149,24 @@ navToggle.addEventListener('click', () => {
   document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
 });
 
+function closeMenu() {
+  navToggle.classList.remove('open');
+  navLinks.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close on nav-link click
 navLinks.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', () => {
-    navToggle.classList.remove('open');
-    navLinks.classList.remove('open');
-    document.body.style.overflow = '';
-  });
+  link.addEventListener('click', closeMenu);
+});
+
+// Close on pill button click (Objednať sa)
+const mobileNavPill = navLinks.querySelector('.nav-pill');
+if (mobileNavPill) mobileNavPill.addEventListener('click', closeMenu);
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navLinks.classList.contains('open')) closeMenu();
 });
 
 // ─── Scroll Reveal ─────────────────────────────
